@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="sport_installation_form_view" model="ir.ui.view">
+        <field name="name">sport.installation.form</field>
+        <field name="model">sport.installation</field>
+        <field name="arch" type="xml">
+            <form string="Instalacion">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="location"/>
+                        <field name="installation_type_id"/>
+                        <field name="rent_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sport_installation_tree_view" model="ir.ui.view">
+        <field name="name">sport.installation.tree</field>
+        <field name="model">sport.installation</field>
+        <field name="arch" type="xml">
+            <tree string="Instalacion">
+                <field name="name"/>
+                <field name="location"/>
+                <field name="installation_type_id"/>
+                <field name="rent_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sport_installation_search_view" model="ir.ui.view">
+        <field name="name">sport.installation.search</field>
+        <field name="model">sport.installation</field>
+        <field name="arch" type="xml">
+            <search string="Instalacion">
+                <field name="name"/>
+                <field name="location"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sport_installation_action" model="ir.actions.act_window">
+        <field name="name">Instalacion</field>
+        <field name="res_model">sport.installation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="sport_installation_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear una instalacion
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sport_top_menu" name="Sport" sequence="50" />
+
+    <menuitem id="sport_side_menu" parent="sport_top_menu" name="Sport" sequence="20" />
+
+    <menuitem id="sport_installation_menu" parent="sport_side_menu" action="sport_installation_action" name="Instalacion" sequence="20" />
+
+</odoo>

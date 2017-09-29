@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="sport_user_coupon_form_view" model="ir.ui.view">
+        <field name="name">user.coupon.form</field>
+        <field name="model">user.coupon</field>
+        <field name="arch" type="xml">
+            <form string="Cupon de usuario" create="0">
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="is_used"/>
+                        <field name="expiration_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sport_user_coupon_tree_view" model="ir.ui.view">
+        <field name="name">user.coupon.tree</field>
+        <field name="model">user.coupon</field>
+        <field name="arch" type="xml">
+            <tree string="Cupon de usuario" create="0" colors="red: (is_used==True) or (expiration_date&lt;=current_date); green: is_used==False;">
+                <field name="code"/>
+                <field name="is_used"/>
+                <field name="expiration_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sport_user_coupon_kanban_view" model="ir.ui.view">
+        <field name="name">user.coupon.kanban</field>
+        <field name="model">user.coupon</field>
+        <field name="arch" type="xml">
+            <kanban string="Cupon de usuario" create="0">
+                <field name="code"/>
+                <field name="is_used"/>
+                <field name="expiration_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_vignette oe_semantic_html_override">
+                            <div class="oe_kanban_details">
+                                <h4>
+                                    <a type="open">
+                                         <t t-if="record.code.raw_value"></t><field name="code"/>
+                                    </a>
+                                </h4>
+                                <div name="tags"/>
+                                <ul>
+                                    <li>Usado: <span attrs="{'invisible':[('is_used','=',False)]}">Si</span><span attrs="{'invisible':[('is_used','=',True)]}">No</span></li>
+                                    <li>Caduca: <field name="expiration_date"></field></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="sport_user_coupon_search_view" model="ir.ui.view">
+        <field name="name">user.coupon.search</field>
+        <field name="model">user.coupon</field>
+        <field name="arch" type="xml">
+            <search string="Cupon de usuario">
+                <field name="code"/>
+                <field name="expiration_date"/>
+
+                <filter string="Disponibles" domain="['&amp;',('expiration_date','&gt;',current_date),('is_used','=',False)]"/>
+                <filter string="No disponibles" domain="['&#124;',('expiration_date','&lt;=',current_date),('is_used','=',True)]"/>
+
+                <group expand="0" string="Agrupar por...">
+                    <filter string="Usado" icon="terp-personal" domain="[]" context="{'group_by':'is_used'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="sport_user_coupon_action" model="ir.actions.act_window">
+        <field name="name">Cupon de usuario</field>
+        <field name="res_model">user.coupon</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="search_view_id" ref="sport_user_coupon_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear un cupon de usuario
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sport_top_menu" name="Sport" sequence="50" />
+
+    <menuitem id="sport_side_menu" parent="sport_top_menu" name="Sport" sequence="20" />
+
+    <menuitem id="sport_user_coupon_menu" parent="sport_side_menu" action="sport_user_coupon_action" name="Cupon de usuario" sequence="20" />
+
+</odoo>

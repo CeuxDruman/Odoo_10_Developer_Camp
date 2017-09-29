@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="sport_rent_form_view" model="ir.ui.view">
+        <field name="name">sport.rent.form</field>
+        <field name="model">sport.rent</field>
+        <field name="arch" type="xml">
+            <form string="Alquiler" create="0">
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="installation_id"/>
+                        <field name="res_partner_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sport_rent_tree_view" model="ir.ui.view">
+        <field name="name">sport.rent.tree</field>
+        <field name="model">sport.rent</field>
+        <field name="arch" type="xml">
+            <tree string="Alquiler" create="0">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="installation_id"/>
+                <field name="res_partner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sport_rent_calendar_view" model="ir.ui.view">
+        <field name="name">sport.rent.calendar</field>
+        <field name="model">sport.rent</field>
+        <field name="arch" type="xml">
+            <calendar string="Alquiler" date_start="start_date" date_stop="end_date" color="installation_id">
+            </calendar>
+        </field>
+    </record>
+
+    <record id="sport_rent_graph_view" model="ir.ui.view">
+        <field name="name">sport.rent.graph</field>
+        <field name="model">sport.rent</field>
+        <field name="arch" type="xml">
+            <graph string="Alquiler">
+                <field name="start_date"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="sport_rent_search_view" model="ir.ui.view">
+        <field name="name">sport.rent.search</field>
+        <field name="model">sport.rent</field>
+        <field name="arch" type="xml">
+            <search string="Alquiler">
+                <field name="start_date"/>
+                <field name="end_date"/>
+
+                <filter string="Pasados" domain="[('end_date','&lt;',((context_today()).strftime('%Y-%m-%d')))]"/>
+                <filter string="Hoy" domain="['&amp;',('start_date','&lt;=',((context_today()).strftime('%Y-%m-%d'))),('end_date','&gt;=',((context_today()).strftime('%Y-%m-%d')))]"/>
+                <filter string="Futuros" domain="[('start_date','&gt;',((context_today()).strftime('%Y-%m-%d')))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sport_rent_action" model="ir.actions.act_window">
+        <field name="name">Alquiler</field>
+        <field name="res_model">sport.rent</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="search_view_id" ref="sport_rent_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear un alquiler
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sport_top_menu" name="Sport" sequence="50" />
+
+    <menuitem id="sport_side_menu" parent="sport_top_menu" name="Sport" sequence="20" />
+
+    <menuitem id="sport_rent_menu" parent="sport_side_menu" action="sport_rent_action" name="Alquiler" sequence="20" />
+
+</odoo>

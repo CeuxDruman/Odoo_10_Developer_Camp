@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="openacademy_course_1" model="openacademy.course">
+        <field name="name">Programacion modulo Odoo 10</field>
+        <field name="description">Aprende Odoo 10 desde cero hasta prorgramar un modulo completo.</field>
+        <field name="state">activo</field>
+        <field name="min_assitants">10</field>
+    </record>
+
+    <record id="openacademy_session_1" model="openacademy.session">
+        <field name="course_id" ref="openacademy_course_1"/>
+        <field name="title">Clase 1</field>
+        <field name="instructor_id"></field>
+        <field name="start_moment"></field>
+        <field name="duration">2</field>
+        <field name="end_moment"></field>
+        <field name="available_seats">5</field>
+        <field name="assistant_ids"></field>
+        <field name="assistance_percentage">0</field>
+    </record>
+</odoo>

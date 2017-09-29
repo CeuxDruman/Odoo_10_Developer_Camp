@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="openacademy_course_create_session_wizard_form_view" model="ir.ui.view">
+        <field name="name">openacademy.course.create.session.wizard.form</field>
+        <field name="model">openacademy.course.create.session.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Crear Sesion Wizard">
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                        <field name="instructor_id"/>
+                        <field name="start_moment"/>
+                        <field name="duration"/>
+                        <field name="seats"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="create_session_wizard" string="Guardar" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="openacademy_course_create_session_wizard_action" model="ir.actions.act_window">
+        <field name="name">Crear Sesion Wizard</field>
+        <field name="res_model">openacademy.course.create.session.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Crear sesion wizard
+            </p>
+        </field>
+    </record>
+
+</odoo>

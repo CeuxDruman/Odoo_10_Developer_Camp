@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="openacademy_instructor_form_view" model="ir.ui.view">
+        <field name="name">openacademy.instructor.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Instructor">
+                <field name="is_instructor" position="attributes" default="True" />
+            </form>
+        </field>
+    </record>
+
+    <record id="openacademy_instructor_tree_view" model="ir.ui.view">
+        <field name="name">openacademy.instructor.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Instructor" domain="[('is_instructor','=',True)]">
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="openacademy_instructor_action" model="ir.actions.act_window">
+        <field name="name">Instructor</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_is_instructor':True}</field>
+        <field name="domain">[('is_instructor','=',True)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear un instructor
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="openacademy_top_menu" name="OpenAcademy" sequence="50" />
+
+    <menuitem id="openacademy_side_menu" parent="openacademy_top_menu" name="OpenAcademy" sequence="20" />
+
+    <menuitem id="openacademy_instructor_menu" parent="openacademy_side_menu" action="openacademy_instructor_action" name="Instructor" sequence="20" />
+
+</odoo>

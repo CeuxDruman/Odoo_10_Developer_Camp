@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="openacademy_assistant_form_view" model="ir.ui.view">
+        <field name="name">openacademy.assistant.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Asistente">
+                <field name="is_instructor" position="attributes" default="True" />
+            </form>
+        </field>
+    </record>
+
+    <record id="openacademy_assistant_tree_view" model="ir.ui.view">
+        <field name="name">openacademy.assistant.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Asistente" domain="[('is_assistant','=',True)]">
+            </tree>
+        </field>
+
+    </record>
+
+    <record id="openacademy_assistant_action" model="ir.actions.act_window">
+        <field name="name">Asistente</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_is_assistant':True}</field>
+        <field name="domain">[('is_assistant','=',True)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear un asistente
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="openacademy_top_menu" name="OpenAcademy" sequence="50" />
+
+    <menuitem id="openacademy_side_menu" parent="openacademy_top_menu" name="OpenAcademy" sequence="20" />
+
+    <menuitem id="openacademy_assistant_menu" parent="openacademy_side_menu" action="openacademy_assistant_action" name="Asistente" sequence="20" />
+
+</odoo>

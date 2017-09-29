@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="openacademy_course_form_view" model="ir.ui.view">
+        <field name="name">openacademy.course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Curso">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="min_assitants"/>
+                        <field name="session_ids">
+                            <tree editable="button">
+                                <field name="title"></field>
+                            </tree>
+                        </field>
+                    </group>
+                    <button name="open_create_session_wizard" string="Crear sesion" type="object"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="openacademy_course_tree_view" model="ir.ui.view">
+        <field name="name">openacademy.course.tree</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <tree string="Curso" colors="blue: state=='por_empezar'; green: state=='activo';">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="session_ids"/>
+                <field name="state"/>
+                <field name="min_assitants"/>
+                <button name="activate" string="Activate" type="object" states="por_empezar"/>
+                <button name="finalize" string="Finalize" type="object" states="activo"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="openacademy_course_search_view" model="ir.ui.view">
+        <field name="name">openacademy.course.search</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <search string="Curso">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="state"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="openacademy_course_action" model="ir.actions.act_window">
+        <field name="name">Curso</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="openacademy_course_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear un curso
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="openacademy_top_menu" name="OpenAcademy" sequence="50" />
+
+    <menuitem id="openacademy_side_menu" parent="openacademy_top_menu" name="OpenAcademy" sequence="20" />
+
+    <menuitem id="openacademy_course_menu" parent="openacademy_side_menu" action="openacademy_course_action" name="Curso" sequence="20" />
+</odoo>

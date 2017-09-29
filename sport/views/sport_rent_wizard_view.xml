@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="sport_rent_wizard_form_view" model="ir.ui.view">
+        <field name="name">sport.rent.wizard.form</field>
+        <field name="model">sport.rent.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Nuevo Alquiler Wizard">
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                        <field name="res_partner_id" options="{'no_quick_create':True,'no_create_edit':True}"/>
+                        <field name="installation_type_id"/>
+                        <field name="installation_id"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="new_rent_wizard" string="Guardar" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="sport_rent_wizard_action" model="ir.actions.act_window">
+        <field name="name">Nuevo alquiler</field>
+        <field name="res_model">sport.rent.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="sport_top_menu" name="Sport" sequence="50" />
+
+    <menuitem id="sport_side_menu" parent="sport_top_menu" name="Sport" sequence="20" />
+
+    <menuitem id="sport_rent_wizard_menu" parent="sport_rent_menu" action="sport_rent_wizard_action" name="Nuevo alquiler" sequence="20" />
+
+</odoo>

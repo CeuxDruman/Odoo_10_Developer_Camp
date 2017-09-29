@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="sport_installation_type_form_view" model="ir.ui.view">
+        <field name="name">installation.type.form</field>
+        <field name="model">installation.type</field>
+        <field name="arch" type="xml">
+            <form string="Tipo de instalacion">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="installation_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sport_installation_type_tree_view" model="ir.ui.view">
+        <field name="name">installation.type.tree</field>
+        <field name="model">installation.type</field>
+        <field name="arch" type="xml">
+            <tree string="Tipo de instalacion">
+                <field name="name"/>
+                <field name="installation_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sport_installation_type_search_view" model="ir.ui.view">
+        <field name="name">installation.type.search</field>
+        <field name="model">installation.type</field>
+        <field name="arch" type="xml">
+            <search string="Tipo de instalacion">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="sport_installation_type_action" model="ir.actions.act_window">
+        <field name="name">Tipo de instalacion</field>
+        <field name="res_model">installation.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="sport_installation_type_search_view"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click para crear un tipo de instalacion
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="sport_top_menu" name="Sport" sequence="50" />
+
+    <menuitem id="sport_side_menu" parent="sport_top_menu" name="Sport" sequence="20" />
+
+    <menuitem id="sport_installation_type_menu" parent="sport_side_menu" action="sport_installation_type_action" name="Tipo de instalacion" sequence="20" />
+
+</odoo>
